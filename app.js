@@ -1,56 +1,27 @@
-// node服务端
+var express = require('express');
 
-// http模块
-var http = require('http');
+var router = express.Router();
 
-// fs模块
-var fs = require('fs');
+var app = express();
 
-// path模块
-var path = require('path');
-// path.extname('abc.css')  能获取文件的扩展名
 
-//url模块
-var url=require('url');
+app.use(express.static('static'));
 
-// 获取扩展名模块
-var mime = require('mime')
+// app.use('/', router);
 
-var server = http.createServer(function (req, res) {
-    
-    // 获取url
-    var pathName =  url.parse(req.url).pathname;
-    // console.log(pathName);
+// // 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
+// router.use('/', function (req, res, next) {
+//     console.log('Time:', Date.now());
+//     next();
+// });
 
-    if (pathName == '/') {
-        pathName = '/index.html';
-    }
-    
-    var extname = path.extname(pathName);
+// app.get('/', function (req, res) {
+//   res.send('Hello World!');
+// });
 
-    if (pathName != '/favicon.ico') {
-        // 获取静态页面
-        fs.readFile('static' + pathName, function (err, data) {    //回调函数
-            // 获取mime类型
-            var mimeText = mime.getType(extname);
-            if (err) {
-                // 如果找不到文件 fs.write404页面
-                fs.readFile('static/404.html', function (err, data) {
-                    res.writeHead(404, {'Content-Type': ''+ mimeText + ';charset=utf-8'});
-                    res.write(data);
-                    res.end();  //结束相应
-                });
-            } else {
-                res.writeHead(200, {'Content-Type': ''+ mimeText + ';charset=utf-8'});
-                res.write(data);
-                res.end();  //结束相应
-            }
-        });
-    }
+var server = app.listen(80, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('Example app listening at http://%s:%s', host, port);
 });
-
-var serverPort = process.env.PORT || 5000;
-
-server.listen(serverPort);
-
-console.log('server listening at '+ serverPort +' port');
