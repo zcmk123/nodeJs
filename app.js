@@ -46,5 +46,5 @@ http.createServer(function (req, res) {
             }
         });
     }
-}).listen(80);
+}).listen($PORT);
 console.log('server listening at 80 port');
