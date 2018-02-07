@@ -4,7 +4,6 @@ var router = express.Router();
 
 var app = express();
 
-
 app.use(express.static('static'));
 
 // app.use('/', router);
