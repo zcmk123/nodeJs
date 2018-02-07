@@ -14,7 +14,7 @@ var path = require('path');
 var url=require('url');
 
 // 获取扩展名模块
-var mime = require('./model/getExtname')
+var mime = require('mime')
 
 var server = http.createServer(function (req, res) {
     
@@ -31,7 +31,8 @@ var server = http.createServer(function (req, res) {
     if (pathName != '/favicon.ico') {
         // 获取静态页面
         fs.readFile('static' + pathName, function (err, data) {    //回调函数
-            var mimeText = mime.getExtname(extname)
+            // 获取mime类型
+            var mimeText = mime.getType(extname);
             if (err) {
                 // 如果找不到文件 fs.write404页面
                 fs.readFile('static/404.html', function (err, data) {

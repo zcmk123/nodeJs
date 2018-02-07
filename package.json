@@ -14,5 +14,13 @@
     "url": "git+https://github.com/zcmk123/nodeJs.git"
   },
   "author": "doublexbird",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zcmk123/nodeJs/issues"
+  },
+  "homepage": "https://github.com/zcmk123/nodeJs#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "mime": "^2.2.0"
+  }
 }
