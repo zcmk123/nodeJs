@@ -16,7 +16,7 @@ var url=require('url');
 // 获取扩展名模块
 var mime = require('./model/getExtname')
 
-http.createServer(function (req, res) {
+var server = http.createServer(function (req, res) {
     
     // 获取url
     var pathName =  url.parse(req.url).pathname;
@@ -46,5 +46,10 @@ http.createServer(function (req, res) {
             }
         });
     }
-}).listen($PORT);
-console.log('server listening at 80 port');
+});
+
+var serverPort = process.env.PORT || 5000;
+
+server.listen(serverPort);
+
+console.log('server listening at '+ serverPort +' port');

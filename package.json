@@ -1,10 +1,13 @@
 {
   "name": "doublebird",
   "version": "1.0.0",
-  "description": "birds cage",
+  "description": "birds-cage",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
+  },
+  "engines": {
+    "node": "8.9.3"
   },
   "repository": {
     "type": "git",
