@@ -32,8 +32,8 @@
         function getTime() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost/getinfo',
-                dataType: 'json',
+                url: 'https://doublebird.herokuapp.com/getinfo',
+                dataType: 'jsonp',
                 success: function (data) {
                     $('.demo').html(data.time);
                     // console.log(data.time);

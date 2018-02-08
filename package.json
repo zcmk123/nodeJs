@@ -22,7 +22,8 @@
   "devDependencies": {},
   "dependencies": {
     "express": "^4.16.2",
-    "mime": "^2.2.0"
+    "mime": "^2.2.0",
+    "mongodb": "^3.0.2"
   },
   "keywords": []
 }
