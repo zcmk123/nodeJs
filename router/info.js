@@ -7,7 +7,7 @@ var info = require('../model/getinfo');
 // controller--getinfo
 // router.use('/getinfo', require('../model/getinfo'));
 
-router.get('/', function (req, res) {
+router.get('/getinfo', function (req, res) {
     // var employees = info.getInfo();
     res.jsonp(info.getTime());
 })
