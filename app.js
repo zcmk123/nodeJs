@@ -18,12 +18,6 @@ app.use(require('./router/info'));
 // app.use(function (req, res, next) {
 //     res.status(404).send('404 NOT FOUND !!!');
 // });
+var serverPort = process.env.PORT || 5000;
 
-var server = app.listen(process.env.PORT, function () {   
-
-    var host = server.address().address;
-    var port = server.address().port;
-
-    console.log('Example app listening at http://%s:%s', host, port);
-
-});    
+var server = app.listen(serverPort);    

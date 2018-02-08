@@ -23,5 +23,6 @@
   "dependencies": {
     "express": "^4.16.2",
     "mime": "^2.2.0"
-  }
+  },
+  "keywords": []
 }
