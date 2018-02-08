@@ -19,7 +19,7 @@ app.use(require('./router/info'));
 //     res.status(404).send('404 NOT FOUND !!!');
 // });
 
-var server = app.listen(80, function () {   
+var server = app.listen(process.env.PORT, function () {   
 
     var host = server.address().address;
     var port = server.address().port;
