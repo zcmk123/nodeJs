@@ -14,8 +14,6 @@ router.get('/getinfo', function (req, res) {
     res.end();
 })
 
-
-
 router.get('/setopenid', function (req, res) {
     var jsCode = url.parse(req.url, true).query.jsCode;
     info.setOpenId(jsCode, res);
