@@ -1,27 +1,38 @@
 // MongoDB
-var MongoClient = require('mongodb').MongoClient,
-    assert = require('assert');
+var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 
-var url = 'mongodb://root:123456@ds225608.mlab.com:25608/doublebird';
-var dbName = 'doublebird';
+// 连接串、数据库名
+var url = 'mongodb://root:123456@119.29.205.219:27017';
+var dbName = 'pinche';
 
+/**
+ * 连接数据库
+ * @param {*} callback 
+ */
+function connect(callback) {
+    MongoClient.connect(url, function (err, client) {
+        if (err) {
+            console.log('数据库连接失败，log:' + err);
+            return;
+        }
+        var db = client.db(dbName);
+        callback(err, db);
+        client.close();
+    })
+}
+
+/** 
+ * 暴露给外界的方法
+*/
 var dbUtil = {
-    insert: function (obj) {
-        return new Promise((resolve, reject) => {
-            MongoClient.connect(url, function (err, client) {
-                assert.equal(null, err);
-                // console.log("Connected successfully to server");
-                var db = client.db(dbName);
-
-                db.collection("user").insertOne(obj, function (err, res) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        return resolve("文档插入成功");
-                    }
-                })
-                client.close();
-            });
+    insert: function (collectionName, obj, callback) {
+        connect(function (err, db) {
+            db.collection(collectionName).insertOne(obj, function (error, res) {
+                if(callback) {
+                    callback(res);
+                }
+            })
         })
     },
     delete: function () {
@@ -30,22 +41,23 @@ var dbUtil = {
     update: function () {
         // 更新
     },
-    find: function (obj) {
+    find: function (collectionName, obj, callback) {
         // 查找
-        return new Promise((resolve, reject) => {
-            MongoClient.connect(url, function (err, client) {
-                assert.equal(null, err);
-                // console.log("Connected successfully to server");
-                var db = client.db(dbName);
-
-                db.collection("user").find(obj).toArray(function (err, result) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        return resolve(result.length);
-                    }
-                    client.close();
-                })
+        connect(function (err, db) {
+            db.collection(collectionName).find(obj).toArray(function (error, result) {
+                if(callback) {
+                    callback(result.length, result);
+                }
+            })
+        })
+    },
+    findById: function (collectionName, ObjectId, callback) {
+        var _id = ObjectId(ObjectId);
+        connect(function (err, db) {
+            db.collection(collectionName).findOne({_id: _id}, {}, function (error, result) {
+                if(callback) {
+                    callback(result);
+                }
             })
         })
     }

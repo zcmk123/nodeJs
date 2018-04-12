@@ -5,6 +5,8 @@ var https = require('https');
 
 var info = require('./router/router');
 
+var bodyParser = require('body-parser');
+
 var privateKey = fs.readFileSync('./certificate/2_pinche.istarmcgames.com.key', 'utf8');
 var certificate = fs.readFileSync('./certificate/1_pinche.istarmcgames.com_bundle.crt', 'utf8');
 var credentials = { key: privateKey, cert: certificate };
@@ -17,10 +19,11 @@ var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
 app.use(express.static('static'));
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(require('./router/router'));
 
-httpServer.listen(80, function () {
+httpServer.listen(8888, function () {
     console.log('HTTP Server is running on: https://localhost:80');
 });
 
