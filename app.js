@@ -23,7 +23,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(require('./router/router'));
 
-httpServer.listen(process.env.PORT || 80, function () {
+var serverPort = process.env.PORT || 80;
+
+httpServer.listen(serverPort, function () {
     console.log('HTTP Server is running on: https://localhost:80');
 });
 
