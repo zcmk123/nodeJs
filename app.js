@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var http = require('http');
-var https = require('https');
+// var https = require('https');
 
 var info = require('./router/router');
 
@@ -23,13 +23,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(require('./router/router'));
 
-httpServer.listen(8888, function () {
+httpServer.listen(process.env.PORT || 80, function () {
     console.log('HTTP Server is running on: https://localhost:80');
 });
 
-httpsServer.listen(443, function () {
-    console.log('HTTPS Server is running on: https://localhost:443');
-});
+// httpsServer.listen(443, function () {
+//     console.log('HTTPS Server is running on: https://localhost:443');
+// });
 // // 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
 // router.use('/', function (req, res, next) {
 //     console.log('Time:', Date.now());
